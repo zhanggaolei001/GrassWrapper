@@ -37,11 +37,11 @@ namespace GrassWrapper.Parameter
     {
         protected ParameterBase(string[] arr)
         {
-            IsAdvancedParameter = arr[0].StartsWith("*"); 
+            IsAdvancedParameter = arr[0].StartsWith("*");
             var name = arr[1];
             if (arr[0].StartsWith("*"))
             {
-                IsAdvancedParameter =true;
+                IsAdvancedParameter = true;
                 name = name.Substring(1);
             }
             var description = arr[2];
@@ -56,9 +56,9 @@ namespace GrassWrapper.Parameter
         public T Value { get; set; }
         public T DefaultValue { get; set; }
 
-        public string ValueAsString()
+        public virtual string ValueAsString()
         {
-            if (Value==null)
+            if (Value == null)
             {
                 return "";
             }
@@ -80,7 +80,7 @@ namespace GrassWrapper.Parameter
             switch (arr[0].Replace("*", ""))
             {
                 case "Hardcoded":
-                    return new Hardcoded(arr[1]); 
+                    return new Hardcoded(arr[1]);
                 case "QgsProcessingParameterMultipleLayers":
                     return new QgsProcessingParameterMultipleLayers(arr);
                 case "QgsProcessingParameterBoolean":
@@ -126,7 +126,7 @@ namespace GrassWrapper.Parameter
                     }
                 default:
                     Console.WriteLine(line);
-                    throw new Exception(line+":无法被识别");
+                    throw new Exception(line + ":无法被识别");
             }
 
             return null;
