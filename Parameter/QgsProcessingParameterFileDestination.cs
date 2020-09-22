@@ -6,7 +6,7 @@
         public QgsProcessingParameterFileDestination(string[] arr) : base(arr)
         {//3extension	DefaultValue	Optional			
             Extension = arr[3];
-            if (arr.Length > 4 && arr[4] !="None"&& string.IsNullOrEmpty(arr[4]))
+            if (arr.Length > 4 && arr[4] !="None"&& !string.IsNullOrEmpty(arr[4]))
             {
                 DefaultValue = arr[4];
                 Value = DefaultValue;

@@ -16,7 +16,7 @@ namespace GrassWrapper.Parameter
             {
                 Extension = arr[4];
             }
-            if (arr.Length > 5 && arr[5] != "None" && string.IsNullOrEmpty(arr[5]))
+            if (arr.Length > 5 && arr[5] != "None" && !string.IsNullOrEmpty(arr[5]))
             {
                 DefaultValue = arr[5];
                 Value = DefaultValue;

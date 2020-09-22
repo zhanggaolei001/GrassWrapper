@@ -8,7 +8,7 @@
     {
         public QgsProcessingParameterRasterDestination(string[] arr) : base(arr)
         {//3DefaultValue	Optional
-            if (arr.Length > 3 && arr[3] !="None"&& string.IsNullOrEmpty(arr[3]))
+            if (arr.Length > 3 && arr[3] !="None"&& !string.IsNullOrEmpty(arr[3]))
             {
                 DefaultValue = arr[3];
                 Value = DefaultValue;

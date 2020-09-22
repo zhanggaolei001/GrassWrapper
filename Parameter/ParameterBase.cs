@@ -38,13 +38,13 @@ namespace GrassWrapper.Parameter
         protected ParameterBase(string[] arr)
         {
             IsAdvancedParameter = arr[0].StartsWith("*"); 
-            var name = arr[0];
+            var name = arr[1];
             if (arr[0].StartsWith("*"))
             {
                 IsAdvancedParameter =true;
                 name = name.Substring(1);
             }
-            var description = arr[1];
+            var description = arr[2];
             Name = name;
             Description = description;
         }
@@ -58,6 +58,10 @@ namespace GrassWrapper.Parameter
 
         public string ValueAsString()
         {
+            if (Value==null)
+            {
+                return "";
+            }
             return Value.ToString();
         }
 

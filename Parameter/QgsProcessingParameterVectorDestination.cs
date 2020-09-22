@@ -9,15 +9,22 @@ namespace GrassWrapper.Parameter
 
             if (arr.Length > 3)
             {
-                Type = (SourceType)int.Parse(arr[3]);
+                if (int.TryParse(arr[3], out var val))
+                {
+                    Type = (SourceType)val;
+                }
+                else
+                {
+                    Type = (SourceType)System.Enum.Parse(typeof(SourceType), arr[3].Split('.')[1]);
+                }
             }
 
-            if (arr.Length > 4 && arr[4] != "None" && string.IsNullOrEmpty(arr[4]))
+            if (arr.Length > 4 && arr[4] != "None" && !string.IsNullOrEmpty(arr[4]))
             {
                 DefaultValue = arr[4];
                 Value = DefaultValue;
             }
-           
+
             if (arr.Length > 5)
             {
                 Optional = bool.Parse(arr[5].ToLower());
@@ -26,7 +33,7 @@ namespace GrassWrapper.Parameter
             {
                 CreateByDefault = bool.Parse(arr[6].ToLower());
             }
-        } 
+        }
         public SourceType Type { get; set; }
         public bool CreateByDefault { get; set; }
     }

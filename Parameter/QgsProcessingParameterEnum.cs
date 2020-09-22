@@ -8,11 +8,11 @@ namespace GrassWrapper.Parameter
         public QgsProcessingParameterEnum(string[] arr) : base(arr)
         {
             Options = arr[3].Split(';');
-            if (arr.Length > 4 && arr[4] != "None" && string.IsNullOrEmpty(arr[4]))
+            if (arr.Length > 4 && arr[4] != "None" && !string.IsNullOrEmpty(arr[4]))
             {
                 AllowMultiple = bool.Parse(arr[4].ToLower());
             }
-            if (arr.Length > 5 && arr[5] != "None" && string.IsNullOrEmpty(arr[5]))
+            if (arr.Length > 5 && arr[5] != "None" && !string.IsNullOrEmpty(arr[5]))
             {
                 DefaultValue = arr[5].Split(',').Select(int.Parse);
                 Value = DefaultValue;

@@ -16,7 +16,7 @@ namespace GrassWrapper.Parameter
     {
         public QgsProcessingParameterPoint(string[] arr) : base(arr)
         {//3:DefaultValue	Optional				
-            if (arr.Length > 3 && arr[3] != "None" && string.IsNullOrEmpty(arr[3]))
+            if (arr.Length > 3 && arr[3] != "None" && !string.IsNullOrEmpty(arr[3]))
             {
                 var xy = arr[3].Split(',').Select(double.Parse).ToArray();
                 DefaultValue = new Point(xy[0], xy[1]);//0.0,0.0
