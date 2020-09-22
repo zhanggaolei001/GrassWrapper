@@ -15,5 +15,6 @@
         public string Name { get; set; } = "Hardcoded has no Name";
         public string Description { get; set; } = "Hardcoded has no Description";
         public bool Optional { get; set; }
+        public bool IsAdvancedParameter { get; set; } 
     }
 }

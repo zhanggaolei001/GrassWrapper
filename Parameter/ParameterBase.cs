@@ -10,6 +10,7 @@ namespace GrassWrapper.Parameter
         string Name { get; set; }
         string Description { get; set; }
         bool Optional { get; set; }
+        bool IsAdvancedParameter { get; set; }
     }
     //Hardcoded:15
     //QgsProcessingParameterMultipleLayers:47

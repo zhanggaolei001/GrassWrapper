@@ -1,0 +1,55 @@
+﻿<Window x:Class="GrassWrapper.View.GrassCommandView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:GrassWrapper.View"
+        xmlns:grassWrapper="clr-namespace:GrassWrapper"
+        xmlns:parameter="clr-namespace:GrassWrapper.Parameter"
+        mc:Ignorable="d"
+        Height="400"
+        Width="400" >
+    <Window.DataContext>
+        <local:GrassCommandViewModel></local:GrassCommandViewModel>
+    </Window.DataContext> 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <StackPanel.Resources>
+                <DataTemplate DataType="parameter:QgsProcessingParameterString"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterBoolean"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterEnum"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterField"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterFile"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterDouble"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterInt"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterRange"></DataTemplate>
+                <DataTemplate DataType="parameter:Hardcoded"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingOutputString"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterCrs"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterExtent"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterFeatureSource"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterFileDestination"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterFolderDestination"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterMultipleLayers"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterPoint"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterRasterDestination"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterRasterLayer"></DataTemplate>
+                <DataTemplate DataType="parameter:QgsProcessingParameterVectorDestination"></DataTemplate>
+
+            </StackPanel.Resources>
+            <GroupBox Header="参数设定">
+                <ListBox ItemsSource="{Binding CommonParameters}">
+                
+                </ListBox>
+            </GroupBox>
+            <Expander Header="高级设定">
+<ListBox ItemsSource="{Binding AdvancedParameters}"></ListBox>
+            </Expander>
+        </StackPanel>
+        <Canvas Grid.Row="1"></Canvas>
+    </Grid>
+</Window>

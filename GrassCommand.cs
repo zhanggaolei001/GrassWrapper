@@ -8,6 +8,27 @@ namespace GrassWrapper
 {
     public class GrassCommand
     {
+        public GrassCommand()
+        {
+            string filePath = @"C:\Users\Administrator\Desktop\description\i.albedo.txt";
+            var lines = File.ReadAllLines(filePath);
+            Name = lines[0];
+            Description = lines[1];
+            Group = lines[2];
+            Parameters = new List<IParameter>();
+            for (int i = 3; i < lines.Length; i++)
+            {
+                if (string.IsNullOrEmpty(lines[i]))
+                {
+                    Console.WriteLine(lines[i]);
+                }
+                else
+                {
+                    Parameters.Add(ParameterFactory.CreateParameter(lines[i]));
+                }
+
+            }
+        }
         public GrassCommand(string filePath)
         {
             var lines = File.ReadAllLines(filePath);
