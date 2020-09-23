@@ -17,6 +17,7 @@ namespace GrassWrapper.Parameter
             {
                 DefaultValue = arr[4].Split(',').ToList();
                 Value = DefaultValue;
+                Console.WriteLine(Value.Count);
             }
             if (arr.Length > 5)
             {

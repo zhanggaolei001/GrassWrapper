@@ -11,6 +11,7 @@ namespace GrassWrapper.Parameter
         string Description { get; set; }
         bool Optional { get; set; }
         bool IsAdvancedParameter { get; set; }
+        string TypeString { get; set; }
     }
     //Hardcoded:15
     //QgsProcessingParameterMultipleLayers:47
@@ -36,8 +37,11 @@ namespace GrassWrapper.Parameter
 
     public abstract class ParameterBase<T> : IParameter
     {
+        private T _value;
+
         protected ParameterBase(string[] arr)
         {
+            TypeString = arr[0].Replace("*", "");
             IsAdvancedParameter = arr[0].StartsWith("*");
             var name = arr[1];
             if (arr[0].StartsWith("*"))
@@ -53,8 +57,24 @@ namespace GrassWrapper.Parameter
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsAdvancedParameter { get; set; }
+
+        public string TypeString { get; set; }
+
+        //public string TypeString { get; set; } 
         public bool Optional { get; set; }
-        public T Value { get; set; }
+
+        public T Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                _value = value;
+            }
+        }
+
         public T DefaultValue { get; set; }
 
         public virtual string ValueAsString()
@@ -78,7 +98,8 @@ namespace GrassWrapper.Parameter
         public static IParameter CreateParameter(string line)
         {
             var arr = line.Split('|');
-            switch (arr[0].Replace("*", ""))
+            var typeString = arr[0].Replace("*", "");
+            switch (typeString)
             {
                 case "Hardcoded":
                     return new Hardcoded(arr[1]);

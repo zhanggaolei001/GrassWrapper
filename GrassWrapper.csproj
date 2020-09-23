@@ -45,6 +45,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Convert\Options2ControlConvertor.cs" />
     <Compile Include="Enum\Behavior.cs" />
     <Compile Include="Enum\DataType.cs" />
     <Compile Include="Enum\SourceType.cs" />
@@ -74,10 +75,17 @@
     <Compile Include="View\GrassCommandView.xaml.cs">
       <DependentUpon>GrassCommandView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QgsProcessingParameterStringView.xaml.cs">
+      <DependentUpon>QgsProcessingParameterStringView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Page Include="View\GrassCommandView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QgsProcessingParameterStringView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

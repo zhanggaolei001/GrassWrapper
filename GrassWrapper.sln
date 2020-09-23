@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrassWrapper", "GrassWrappe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrassWrapperTest", "..\GrassWrapperTest\GrassWrapperTest.csproj", "{610FDB40-9F0C-46EB-8EB5-1FC82FB3C309}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrassWrapperTestWithUI", "..\GrassWrapperTestWithUI\GrassWrapperTestWithUI.csproj", "{DF70C568-FA37-400A-B0C6-DCBA4E705CF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{610FDB40-9F0C-46EB-8EB5-1FC82FB3C309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{610FDB40-9F0C-46EB-8EB5-1FC82FB3C309}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{610FDB40-9F0C-46EB-8EB5-1FC82FB3C309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF70C568-FA37-400A-B0C6-DCBA4E705CF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF70C568-FA37-400A-B0C6-DCBA4E705CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF70C568-FA37-400A-B0C6-DCBA4E705CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF70C568-FA37-400A-B0C6-DCBA4E705CF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

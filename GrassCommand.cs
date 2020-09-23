@@ -63,7 +63,11 @@ namespace GrassWrapper
             var commandStr = Name;
             foreach (var parameter in Parameters)
             {
-                commandStr += $" {parameter.ToString()}";
+                var str = parameter.ToString();
+                if (!string.IsNullOrEmpty(str))
+                {
+                    commandStr += $" {str}";
+                }
             }
             return commandStr;
         }

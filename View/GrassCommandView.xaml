@@ -6,50 +6,146 @@
         xmlns:local="clr-namespace:GrassWrapper.View"
         xmlns:grassWrapper="clr-namespace:GrassWrapper"
         xmlns:parameter="clr-namespace:GrassWrapper.Parameter"
+        xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:convert="clr-namespace:GrassWrapper.Convert"
         mc:Ignorable="d"
-        Height="400"
-        Width="400" >
+        Name="WindowTest"
+        Height="700"
+        Width="600">
     <Window.DataContext>
         <local:GrassCommandViewModel></local:GrassCommandViewModel>
-    </Window.DataContext> 
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <StackPanel>
-            <StackPanel.Resources>
-                <DataTemplate DataType="parameter:QgsProcessingParameterString"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterBoolean"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterEnum"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterField"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterFile"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterDouble"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterInt"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterRange"></DataTemplate>
-                <DataTemplate DataType="parameter:Hardcoded"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingOutputString"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterCrs"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterExtent"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterFeatureSource"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterFileDestination"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterFolderDestination"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterMultipleLayers"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterPoint"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterRasterDestination"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterRasterLayer"></DataTemplate>
-                <DataTemplate DataType="parameter:QgsProcessingParameterVectorDestination"></DataTemplate>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="3"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <local:ParameterDataTemplateSelector x:Key="ParameterDataTemplateSelector"></local:ParameterDataTemplateSelector>
+                    <DataTemplate x:Key="QgsProcessingParameterString"
+                                  DataType="parameter:QgsProcessingParameterString">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <DockPanel  LastChildFill="True">
+                                <Label Content="{Binding Description}"></Label>
+                                <Label HorizontalAlignment="Right"
+                                       Content="{Binding Name}"></Label>
+                            </DockPanel>
+                            <Grid Grid.Row="1">
+                                <TextBox Text="{Binding Value}"></TextBox>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterBoolean"
+                                  DataType="parameter:QgsProcessingParameterBoolean">
+                        <Grid>
+                            <DockPanel  LastChildFill="True">
+                                <CheckBox IsChecked="{Binding Value}"
+                                          Content="{Binding Description}"></CheckBox>
+                                <Label HorizontalAlignment="Right"
+                                       Content="{Binding Name}"></Label>
+                            </DockPanel>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterEnum"
+                                  DataType="parameter:QgsProcessingParameterEnum">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <DockPanel  LastChildFill="True">
+                                <Label Content="{Binding Description}"></Label>
+                                <Label HorizontalAlignment="Right"
+                                       Content="{Binding Name}">
+                                </Label>
+                            </DockPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.Resources>
+                                    <convert:Options2ControlConvertor x:Key="Options2ControlConvertor"></convert:Options2ControlConvertor>
+                                    <local:ParameterEnumDataTemplateSelector x:Key="ParameterEnumDataTemplateSelector"></local:ParameterEnumDataTemplateSelector>
 
-            </StackPanel.Resources>
-            <GroupBox Header="参数设定">
-                <ListBox ItemsSource="{Binding CommonParameters}">
-                
-                </ListBox>
+                                </Grid.Resources>
+                                <GroupBox Header="可选参数:">
+                                    <ContentControl>
+                                        <ContentControl.Content>
+                                            <MultiBinding Converter="{StaticResource Options2ControlConvertor}">
+                                                <Binding Path="AllowMultiple"></Binding>
+                                                <Binding Path="Options"></Binding>
+                                            </MultiBinding>
+                                        </ContentControl.Content>
+                                    </ContentControl>
+                                </GroupBox>
+
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterField"
+                                  DataType="parameter:QgsProcessingParameterField"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterFile"
+                                  DataType="parameter:QgsProcessingParameterFile"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterDouble"
+                                  DataType="parameter:QgsProcessingParameterDouble"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterInt"
+                                  DataType="parameter:QgsProcessingParameterInt"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterRange"
+                                  DataType="parameter:QgsProcessingParameterRange"></DataTemplate>
+                    <!--<DataTemplate x:Key="Hardcoded"
+                              DataType="parameter:Hardcoded"></DataTemplate>-->
+                    <DataTemplate x:Key="QgsProcessingOutputString"
+                                  DataType="parameter:QgsProcessingOutputString"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterCrs"
+                                  DataType="parameter:QgsProcessingParameterCrs"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterExtent"
+                                  DataType="parameter:QgsProcessingParameterExtent"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterFeatureSource"
+                                  DataType="parameter:QgsProcessingParameterFeatureSource"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterFileDestination"
+                                  DataType="parameter:QgsProcessingParameterFileDestination"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterFolderDestination"
+                                  DataType="parameter:QgsProcessingParameterFolderDestination"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterMultipleLayers"
+                                  DataType="parameter:QgsProcessingParameterMultipleLayers"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterPoint"
+                                  DataType="parameter:QgsProcessingParameterPoint"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterRasterDestination"
+                                  DataType="parameter:QgsProcessingParameterRasterDestination"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterRasterLayer"
+                                  DataType="parameter:QgsProcessingParameterRasterLayer"></DataTemplate>
+                    <DataTemplate x:Key="QgsProcessingParameterVectorDestination"
+                                  DataType="parameter:QgsProcessingParameterVectorDestination"></DataTemplate>
+                </StackPanel.Resources>
+                <GroupBox Header="参数设定">
+                    <ItemsControl ItemsSource="{Binding CommonParameters}"
+                                  Name="Controls1"
+                                  ItemTemplateSelector="{StaticResource ParameterDataTemplateSelector}">
+
+                    </ItemsControl>
+                </GroupBox>
+                <Expander Header="高级设定">
+                    <ItemsControl ItemsSource="{Binding AdvancedParameters}"></ItemsControl>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid Grid.Row="0"
+              Grid.Column="2">
+            <GroupBox Header="功能说明">
+                <TextBlock Text="{Binding GrassCommand.Description}"
+                           TextWrapping="WrapWithOverflow"></TextBlock>
             </GroupBox>
-            <Expander Header="高级设定">
-<ListBox ItemsSource="{Binding AdvancedParameters}"></ListBox>
-            </Expander>
-        </StackPanel>
-        <Canvas Grid.Row="1"></Canvas>
+        </Grid>
+        <Canvas Grid.Row="1"
+                Grid.Column="0"></Canvas>
     </Grid>
 </Window>

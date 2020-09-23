@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -23,37 +24,88 @@ namespace GrassWrapper.View
     /// </summary>
     public partial class GrassCommandView : Window
     {
-        public GrassCommand GrassCommand { get; set; }
+
         public GrassCommandView(GrassCommand command)
         {
             InitializeComponent();
-            GrassCommand = command;
-            this.DataContext = command; 
+            this.DataContext = new GrassCommandViewModel(command);
         }
     }
-    public class GrassCommandViewModel:INotifyPropertyChanged
+
+    public class GrassCommandViewModel : INotifyPropertyChanged
     {
         public GrassCommandViewModel()
         {
-            GrassCommand=new GrassCommand();
-         
-            CommonParameters = GrassCommand.Parameters.Where(p => !p.IsAdvancedParameter).ToList();
-            AdvancedParameters = GrassCommand.Parameters.Where(p => p.IsAdvancedParameter).ToList();
+            GrassCommand = new GrassCommand();
+
+            CommonParameters =
+                new ObservableCollection<IParameter>(
+                    GrassCommand.Parameters.Where(p => !p.IsAdvancedParameter).ToList());
+            AdvancedParameters =
+                new ObservableCollection<IParameter>(GrassCommand.Parameters.Where(p => p.IsAdvancedParameter)
+                    .ToList());
+            ;
+
         }
+
         public GrassCommandViewModel(GrassCommand cmd)
         {
             GrassCommand = cmd;
-            CommonParameters = cmd.Parameters.Where(p => !p.IsAdvancedParameter).ToList();
-            AdvancedParameters = cmd.Parameters.Where(p => p.IsAdvancedParameter).ToList();
+            CommonParameters =
+                new ObservableCollection<IParameter>(cmd.Parameters.Where(p => !p.IsAdvancedParameter).ToList());
+            AdvancedParameters =
+                new ObservableCollection<IParameter>(cmd.Parameters.Where(p => p.IsAdvancedParameter).ToList());
+            ;
         }
+
         public GrassCommand GrassCommand { get; set; }
-        public List<IParameter> CommonParameters { get; set; }
-        public List<IParameter> AdvancedParameters { get; set; }
+        public ObservableCollection<IParameter> CommonParameters { get; set; }
+        public ObservableCollection<IParameter> AdvancedParameters { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class ParameterDataTemplateSelector : DataTemplateSelector
+    {
+        public override DataTemplate
+            SelectTemplate(object item, DependencyObject container)
+        {
+            FrameworkElement element = container as FrameworkElement;
+
+            if (element != null && item != null && item is IParameter)
+            {
+                var taskitem = item as IParameter;
+                return element.FindResource(taskitem.TypeString) as DataTemplate;
+            }
+            return null;
+        }
+    }
+    public class ParameterEnumDataTemplateSelector : DataTemplateSelector
+    {
+        public override DataTemplate
+            SelectTemplate(object item, DependencyObject container)
+        {
+            FrameworkElement element = container as FrameworkElement;
+
+            if (element != null && item != null && item is IParameter)
+            {
+                var p = (item as QgsProcessingParameterEnum);
+                if (p.AllowMultiple)
+                { 
+                    return element.FindResource("QgsProcessingParameterEnumCheckBoxList") as DataTemplate;
+                }
+                else
+                {
+                    return element.FindResource("QgsProcessingParameterEnumRadioButtonList") as DataTemplate;
+
+                }
+
+            }
+            return null;
         }
     }
 }

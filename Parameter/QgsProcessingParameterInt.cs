@@ -7,7 +7,8 @@
     {
         public QgsProcessingParameterInt(string[] arr) : base(arr)
         {//0 1 2 3:Type	4DefaultValue	Optional	minValue	MaxValue
-            //Type在工厂方法中进行处理,区分double或int.
+         //Type在工厂方法中进行处理,区分double或int.
+            TypeString = "QgsProcessingParameterInt";
             if (arr.Length > 4 && arr[4] != "None" && !string.IsNullOrEmpty(arr[4]))
             {
                 DefaultValue = int.Parse(arr[4]);
