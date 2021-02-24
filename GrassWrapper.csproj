@@ -72,6 +72,7 @@
     <Compile Include="Parameter\QgsProcessingParameterFile.cs" />
     <Compile Include="Parameter\QgsProcessingParameterMultipleLayers.cs" />
     <Compile Include="Parameter\QgsProcessingParameterString.cs" />
+    <Compile Include="Trans\Class1.cs" />
     <Compile Include="View\GrassCommandView.xaml.cs">
       <DependentUpon>GrassCommandView.xaml</DependentUpon>
     </Compile>
